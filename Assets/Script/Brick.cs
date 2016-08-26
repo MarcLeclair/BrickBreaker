@@ -10,6 +10,7 @@ public class Brick : MonoBehaviour
     public Sprite[] hitSprites;
     public static int breakableCount=0;
     public GameObject smoke;
+    public SpriteOfBonus[] bonus;
 
     private int hitCounter;
     private int maxHit;
@@ -52,13 +53,9 @@ public class Brick : MonoBehaviour
 
         if (hitCounter >= maxHit)
         {
-            
+
             // = Quaternion.identity;
-            breakableCount--;
-            GameObject smokePuff = (GameObject)Instantiate(smoke, gameObject.transform.position, Quaternion.identity);
-            smokePuff.GetComponent<ParticleSystem>().startColor = gameObject.GetComponent<SpriteRenderer>().color;
-            Destroy(gameObject);
-            lvlManager.BrickDestroyed();
+            brickDestroyedEven();
         }
         else
             loadSprites();
@@ -73,5 +70,44 @@ public class Brick : MonoBehaviour
         }
         else
             Debug.LogError("Sprite at index " + spriteIndex + " is missing")    ;
+    }
+    void brickDestroyedEvent()
+    {
+        //TODO Call bonus spawn on destroying a brick if chance is higher than lvlManager.chance
+        breakableCount--;
+        GameObject smokePuff = (GameObject)Instantiate(smoke, gameObject.transform.position, Quaternion.identity);
+        smokePuff.GetComponent<ParticleSystem>().startColor = gameObject.GetComponent<SpriteRenderer>().color;
+        Destroy(gameObject);
+        lvlManager.BrickDestroyed();
+    }
+    void bonusSpawn()
+    {
+        double willSpawn = Random.value;
+
+        if(willSpawn > LevelManager.chance)
+        {
+            double bonusToSpawn = Random.value;
+
+            if (bonusToSpawn > .85)
+            {
+                createSpawn("life");
+                break;
+            }
+            else if (bonusToSpawn > .50)
+            {
+                createSpawn("longer");
+                break;
+            }
+            else
+                createSpawn("slow");
+ 
+        }
+    }
+
+    void createSpawn(string nameOfSpawn)
+    {
+        //TODO Create game object and add velocity + on trigger when contact the paddle
+        GameObject whatToSpawn = (GameObject)Instantiate(spawn, gameObject.transform.position, Quaternion.identity);
+        whatToSpawn.GetComponent<ParticleSystem>().startColor = gameObject.GetComponent<SpriteRenderer>().color;
     }
 }
