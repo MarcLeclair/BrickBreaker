@@ -10,7 +10,8 @@ public class Brick : MonoBehaviour
     public Sprite[] hitSprites;
     public static int breakableCount=0;
     public GameObject smoke;
-    public SpriteOfBonus[] bonus;
+    public GameObject spawn;
+    public Sprite[] bonus;
 
     private int hitCounter;
     private int maxHit;
@@ -55,7 +56,7 @@ public class Brick : MonoBehaviour
         {
 
             // = Quaternion.identity;
-            brickDestroyedEven();
+            brickDestroyedEvent();
         }
         else
             loadSprites();
@@ -91,12 +92,12 @@ public class Brick : MonoBehaviour
             if (bonusToSpawn > .85)
             {
                 createSpawn("life");
-                break;
+                return;
             }
             else if (bonusToSpawn > .50)
             {
                 createSpawn("longer");
-                break;
+                return; 
             }
             else
                 createSpawn("slow");

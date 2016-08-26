@@ -4,7 +4,7 @@ using System.Collections;
 public class paddle : MonoBehaviour {
     public bool autoPlay = false;
 
-    
+    private ball ball;
 
     void Start()
     {
