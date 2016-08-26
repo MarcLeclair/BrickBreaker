@@ -10,7 +10,7 @@ public class Brick : MonoBehaviour
     public Sprite[] hitSprites;
     public static int breakableCount=0;
     public GameObject smoke;
-    public GameObject spawn;
+    public GameObject XLife,XLong, SlowDown;
     public Sprite[] bonus;
 
     private int hitCounter;
@@ -76,39 +76,44 @@ public class Brick : MonoBehaviour
     {
         //TODO Call bonus spawn on destroying a brick if chance is higher than lvlManager.chance
         breakableCount--;
+        
         GameObject smokePuff = (GameObject)Instantiate(smoke, gameObject.transform.position, Quaternion.identity);
         smokePuff.GetComponent<ParticleSystem>().startColor = gameObject.GetComponent<SpriteRenderer>().color;
         Destroy(gameObject);
+        bonusSpawn();
         lvlManager.BrickDestroyed();
     }
     void bonusSpawn()
     {
         double willSpawn = Random.value;
+        Debug.Log(willSpawn);
 
-        if(willSpawn > LevelManager.chance)
+        if(willSpawn > (1- LevelManager.chance))
         {
+            Debug.Log("willSpawn was greater");
             double bonusToSpawn = Random.value;
 
             if (bonusToSpawn > .85)
             {
-                createSpawn("life");
+                createSpawn(XLife);
                 return;
             }
             else if (bonusToSpawn > .50)
             {
-                createSpawn("longer");
+                createSpawn(XLong);
                 return; 
             }
             else
-                createSpawn("slow");
+                createSpawn(SlowDown);
+            return;
  
         }
     }
 
-    void createSpawn(string nameOfSpawn)
+    void createSpawn(GameObject nameOfSpawn)
     {
         //TODO Create game object and add velocity + on trigger when contact the paddle
-        GameObject whatToSpawn = (GameObject)Instantiate(spawn, gameObject.transform.position, Quaternion.identity);
-        whatToSpawn.GetComponent<ParticleSystem>().startColor = gameObject.GetComponent<SpriteRenderer>().color;
+        GameObject whatToSpawn = (GameObject)Instantiate(nameOfSpawn, gameObject.transform.position, Quaternion.identity);
+        whatToSpawn.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, -2f);
     }
 }

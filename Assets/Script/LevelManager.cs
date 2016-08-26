@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 public class LevelManager : MonoBehaviour {
 
     private float time;
-    public static double chance;
+    public static float chance;
 
     public void LoadLevel(string name)
     {
@@ -26,6 +26,7 @@ public class LevelManager : MonoBehaviour {
     {
         //TODO fix calculate so it occurs on the right level call
         time = Time.timeSinceLevelLoad;
+        
         calculateChancePercentage();
         Brick.breakableCount = 0;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
@@ -42,25 +43,33 @@ public class LevelManager : MonoBehaviour {
     public void calculateChancePercentage()
     {
         float timeLimit = (SceneManager.GetActiveScene().buildIndex - 1) * 15 ;
+        Debug.Log("timeLimit is " + timeLimit);
         if (time < 30 + timeLimit)
         {
-            chance = 3 / 4;
+           
+            chance = (float) 4 / 4;
+           
+            return;
         }
-        if(time < 45 + timeLimit)
+        if(time < 45 + timeLimit )
         {
-            chance = 2 / 4;
+            chance = (float)2 / 4;
+            return;
         }
         if(time < 60 + timeLimit)
         {
-            chance = 1 / 4;
+            chance = (float)1 / 4;
+            return;
         }
         if(time < 90 + timeLimit)
         {
-            chance = 1 / 5;
+            chance = (float)1 / 5;
+            return;
         }
         if(time < 120 + timeLimit)
         {
-            chance = 1 / 6;
+            chance = (float) 1 / 6;
+            return;
         }
     }
     
