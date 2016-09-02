@@ -35,6 +35,12 @@ public class ball : MonoBehaviour {
         {
             GetComponent<AudioSource>().Play();
             GetComponent<Rigidbody2D>().velocity += tweak;
+           
         }
+    }
+  public void whatis()
+    {
+        Debug.Log("current pos " + this.transform.position);
+        Debug.Log("current pos " + this.transform.GetComponent<Rigidbody2D>().velocity);
     }
 }

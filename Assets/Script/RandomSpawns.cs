@@ -7,6 +7,7 @@ public class RandomSpawns : MonoBehaviour {
     public ball ball;
     public Brick brick;
 
+    public string nameOfSpawn;
  
     void Update()
     {
@@ -27,8 +28,24 @@ public class RandomSpawns : MonoBehaviour {
     {
         if (collision.gameObject.tag == "paddle")
         {
+            triggeredEffect();
             Debug.Log("Right here");
             Destroy(this.gameObject);
+           
         }
     }
+
+    void triggeredEffect()
+    {
+        if (string.Equals(nameOfSpawn, "slowdown"))
+            {
+            Debug.Log("position " + ball.transform.position);
+            ball.whatis();
+            Debug.Log("current velocity " + ball.GetComponent<Rigidbody2D>().velocity);
+            Vector2 velocity = ball.GetComponent<Rigidbody2D>().velocity;
+            ball.GetComponent<Rigidbody2D>().velocity = velocity * 0.5f;
+            Debug.Log("slowdown: new velocity" + ball.GetComponent<Rigidbody2D>().velocity);
+        }
+    }
+    
 }
