@@ -39,12 +39,8 @@ public class RandomSpawns : MonoBehaviour {
     {
         if (string.Equals(nameOfSpawn, "slowdown"))
             {
-            Debug.Log("position " + ball.transform.position);
-            ball.whatis();
-            Debug.Log("current velocity " + ball.GetComponent<Rigidbody2D>().velocity);
-            Vector2 velocity = ball.GetComponent<Rigidbody2D>().velocity;
-            ball.GetComponent<Rigidbody2D>().velocity = velocity * 0.5f;
-            Debug.Log("slowdown: new velocity" + ball.GetComponent<Rigidbody2D>().velocity);
+            Vector2 velocity = GameObject.FindGameObjectWithTag("ball").GetComponent<Rigidbody2D>().velocity;
+            GameObject.FindGameObjectWithTag("ball").GetComponent<Rigidbody2D>().velocity = velocity * 0.5f;
         }
     }
     

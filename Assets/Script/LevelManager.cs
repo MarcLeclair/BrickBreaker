@@ -6,11 +6,14 @@ public class LevelManager : MonoBehaviour {
 
     private float time;
     public static float chance;
+    public int life;
 
     public void LoadLevel(string name)
     {
         Brick.breakableCount = 0;
         SceneManager.LoadScene(name);
+        setLife();
+        Debug.Log(life);
 
     }
     public void QuitGame()  
@@ -26,7 +29,7 @@ public class LevelManager : MonoBehaviour {
     {
         //TODO fix calculate so it occurs on the right level call
         time = Time.timeSinceLevelLoad;
-        
+        setLife();
         calculateChancePercentage();
         Brick.breakableCount = 0;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
@@ -71,6 +74,16 @@ public class LevelManager : MonoBehaviour {
             chance = (float) 1 / 6;
             return;
         }
+    }
+
+    public int getLife()
+    {
+        return life;
+    }
+
+    private void setLife()
+    {
+        life = 3;
     }
     
 }

@@ -13,6 +13,7 @@ public class Brick : MonoBehaviour
     public GameObject XLife,XLong, SlowDown;
     public Sprite[] bonus;
 
+
     private int hitCounter;
     private int maxHit;
     private bool isBreakable;
@@ -82,6 +83,7 @@ public class Brick : MonoBehaviour
         Destroy(gameObject);
         bonusSpawn();
         lvlManager.BrickDestroyed();
+
     }
     void bonusSpawn()
     {

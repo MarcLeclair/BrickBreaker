@@ -38,9 +38,5 @@ public class ball : MonoBehaviour {
            
         }
     }
-  public void whatis()
-    {
-        Debug.Log("current pos " + this.transform.position);
-        Debug.Log("current pos " + this.transform.GetComponent<Rigidbody2D>().velocity);
-    }
+ 
 }
