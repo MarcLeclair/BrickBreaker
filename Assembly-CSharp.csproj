@@ -47,6 +47,7 @@
   <ItemGroup>
      <Compile Include="Assets\Script\Brick.cs" />
      <Compile Include="Assets\Script\LevelManager.cs" />
+     <Compile Include="Assets\Script\LifeManager.cs" />
      <Compile Include="Assets\Script\LoseCollider.cs" />
      <Compile Include="Assets\Script\Music.cs" />
      <Compile Include="Assets\Script\RandomSpawns.cs" />

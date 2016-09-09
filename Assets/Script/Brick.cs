@@ -88,11 +88,11 @@ public class Brick : MonoBehaviour
     void bonusSpawn()
     {
         double willSpawn = Random.value;
-        Debug.Log(willSpawn);
+        //Debug.Log(willSpawn);
 
         if(willSpawn > (1- LevelManager.chance))
         {
-            Debug.Log("willSpawn was greater");
+           // Debug.Log("willSpawn was greater");
             double bonusToSpawn = Random.value;
 
             if (bonusToSpawn > .85)
