@@ -9,7 +9,7 @@ public class LifeManager : MonoBehaviour {
     {
         if (instance != null)
         {
-            Destroy(gameObject);
+           // Destroy(gameObject);
 
         }
         else

@@ -29,7 +29,7 @@ public class RandomSpawns : MonoBehaviour {
         if (collision.gameObject.tag == "paddle")
         {
             triggeredEffect();
-            Debug.Log("Right here");
+           // Debug.Log("Right here");
             Destroy(this.gameObject);
            
         }
@@ -41,6 +41,11 @@ public class RandomSpawns : MonoBehaviour {
             {
             Vector2 velocity = GameObject.FindGameObjectWithTag("ball").GetComponent<Rigidbody2D>().velocity;
             GameObject.FindGameObjectWithTag("ball").GetComponent<Rigidbody2D>().velocity = velocity * 0.5f;
+        }
+        if (string.Equals(nameOfSpawn, "xlife"))
+        {
+            GameObject.FindGameObjectWithTag("loseCollider").GetComponent<LoseCollider>().setLife(1, '+');
+            Debug.Log(GameObject.FindGameObjectWithTag("loseCollider").GetComponent<LoseCollider>().getLife());
         }
     }
     

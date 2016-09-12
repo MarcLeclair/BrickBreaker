@@ -9,7 +9,7 @@ public class ball : MonoBehaviour {
 	void Start () {
         paddle = GameObject.FindObjectOfType<paddle>();
         paddleToBall = this.transform.position - paddle.transform.position;
-        print(paddleToBall);
+        //print(paddleToBall);
 	}
 	
 	// Update is called once per frame

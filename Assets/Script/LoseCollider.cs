@@ -4,26 +4,61 @@ using UnityEngine.SceneManagement;
 
 public class LoseCollider : MonoBehaviour {
 
-    
+    static bool isSet = false;
+    private static int life;
     public LevelManager lvlManager;
+
+    void Awake()
+    {
+        if (isSet == false)
+        {
+            setLife(0, 'r');
+        }
+    }
 	void OnTriggerEnter2D (Collider2D collision)
     {
-        Debug.Log("stuck here");
-        Debug.Log("life is " + GameObject.FindGameObjectWithTag("lvlManager").GetComponent<LevelManager>().getLife());
-        if (GameObject.FindGameObjectWithTag("lvlManager").GetComponent<LevelManager>().getLife() <= 0)
+       
+        if(life <= 0 )
         {
-            Debug.Log("lmao you're here");
+            
             lvlManager = GameObject.FindObjectOfType<LevelManager>();
             lvlManager.LoadLevel("Lose");
+            isSet = false;
         }
         else
         {
-            Debug.Log("restarted");
-            Destroy(GameObject.FindGameObjectWithTag("life"));
+
+            setLife(1, '-');
+            Brick.breakableCount = 0;
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-            GameObject.FindGameObjectWithTag("lvlManager").GetComponent<LevelManager>().setLife(1, '-');
-            Debug.Log("life is now " + GameObject.FindGameObjectWithTag("lvlManager").GetComponent<LevelManager>().getLife());
         }
+     
     }
-   
+
+    public void setLife(int x, char opp)
+    {
+        if (string.Equals(opp, '+'))
+        {
+            life += x;
+            isSet = true;
+        }
+        else if (string.Equals(opp, '-'))
+        {
+            
+            life -= x;
+            isSet = true;
+    
+        }
+        else if (string.Equals(opp, 'r'))
+        {
+            life = 3;
+            isSet = false;
+        }
+        else
+            Debug.LogError("wrong opperand");
+    }
+    public int getLife()
+    {
+        return life;
+    }
 }

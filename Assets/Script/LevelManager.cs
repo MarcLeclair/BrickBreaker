@@ -6,14 +6,14 @@ public class LevelManager : MonoBehaviour {
 
     private float time;
     public static float chance;
-    private static int life;
+   
 
     public void LoadLevel(string name)
     {
+     
         Brick.breakableCount = 0;
         SceneManager.LoadScene(name);
-        setLife(0, 'r');
-        Debug.Log(life);
+      
 
     }
     public void QuitGame()  
@@ -29,7 +29,6 @@ public class LevelManager : MonoBehaviour {
     {
         //TODO fix calculate so it occurs on the right level call
         time = Time.timeSinceLevelLoad;
-        setLife(0, 'r' );
         calculateChancePercentage();
         Brick.breakableCount = 0;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
@@ -76,28 +75,9 @@ public class LevelManager : MonoBehaviour {
         }
     }
 
-    public int getLife()
-    {
-        return life;
-    }
+    
 
-    public void setLife(int x, char opp)
-    {
-        if (string.Equals(opp, '+'))
-        {
-            life = 3 + x;
-        }
-        else if (string.Equals(opp, '-'))
-        {
-            life = 3 - x;
-        }
-        else if (string.Equals(opp, 'r'))
-        {
-            life = 3;
-        }
-        else
-            Debug.LogError("wrong opperand");
-    }
+  
     
 }
 
