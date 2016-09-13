@@ -7,12 +7,14 @@ public class LoseCollider : MonoBehaviour {
     static bool isSet = false;
     private static int life;
     public LevelManager lvlManager;
+    public Sprite[] lifeSprites;
 
     void Awake()
     {
         if (isSet == false)
         {
             setLife(0, 'r');
+            
         }
     }
 	void OnTriggerEnter2D (Collider2D collision)
@@ -30,6 +32,8 @@ public class LoseCollider : MonoBehaviour {
 
             setLife(1, '-');
             Brick.breakableCount = 0;
+            Debug.Log(GameObject.FindGameObjectWithTag("life").GetComponent<LifeManager>().getIndex());
+            GameObject.FindGameObjectWithTag("life").GetComponent<LifeManager>().loadSprites("down");
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
      
