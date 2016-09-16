@@ -24,6 +24,7 @@ public class LoseCollider : MonoBehaviour {
         {
             
             lvlManager = GameObject.FindObjectOfType<LevelManager>();
+            GameObject.FindGameObjectWithTag("life").GetComponent<LifeManager>().resetLife();
             lvlManager.LoadLevel("Lose");
             isSet = false;
         }
@@ -32,7 +33,6 @@ public class LoseCollider : MonoBehaviour {
 
             setLife(1, '-');
             Brick.breakableCount = 0;
-            Debug.Log(GameObject.FindGameObjectWithTag("life").GetComponent<LifeManager>().getIndex());
             GameObject.FindGameObjectWithTag("life").GetComponent<LifeManager>().loadSprites("down");
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
@@ -55,7 +55,7 @@ public class LoseCollider : MonoBehaviour {
         }
         else if (string.Equals(opp, 'r'))
         {
-            life = 3;
+            life = 2;
             isSet = false;
         }
         else

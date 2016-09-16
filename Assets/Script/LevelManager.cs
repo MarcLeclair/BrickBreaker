@@ -13,7 +13,6 @@ public class LevelManager : MonoBehaviour {
      
         Brick.breakableCount = 0;
         SceneManager.LoadScene(name);
-      
 
     }
     public void QuitGame()  

@@ -2,41 +2,32 @@
 using System.Collections;
 
 public class LifeManager : MonoBehaviour {
-    private int currentIndex = 0;
+    private  static int  currentIndex = 0;
     public Sprite[] lifeSprites;
     static LifeManager instance = null;
     // Use this for initialization
 
     void Awake()
     {
-        if (instance != null)
-        {
-            Debug.Log("Destryoing" + instance);
-            Destroy(gameObject);
-
-        }
-        else
-        {
-            Debug.Log(instance);
-            instance = this;
-            GameObject.DontDestroyOnLoad(gameObject);
-        }
+        this.GetComponent<SpriteRenderer>().sprite = lifeSprites[currentIndex];
 
     }
 
-       public void loadSprites(string life)
+
+    public void loadSprites(string life)
     {
-        if (string.Equals(life, "up"))
+        if (string.Equals(life, "down"))
         {
-            if(currentIndex > 3)
+            if(currentIndex > 2)
             {
                 //Do nothing
             }
-            else if(currentIndex < 3){
-                this.GetComponent<SpriteRenderer>().sprite = lifeSprites[currentIndex - 1];
+            else if(currentIndex < 2){
+                this.GetComponent<SpriteRenderer>().sprite = lifeSprites[currentIndex + 1];
+                currentIndex += 1;
             }
         }
-        if (string.Equals(life, "down"))
+        if (string.Equals(life, "up"))
         {
 
             if (currentIndex < 0)
@@ -45,13 +36,18 @@ public class LifeManager : MonoBehaviour {
             }
             else if (currentIndex > 0)
             {
-                this.GetComponent<SpriteRenderer>().sprite = lifeSprites[currentIndex + 1];
+                this.GetComponent<SpriteRenderer>().sprite = lifeSprites[currentIndex - 1];
+                currentIndex -= 1;
             }
         }
     }
     public int getIndex()
     {
         return currentIndex;
+    }
+    public void resetLife()
+    {
+        currentIndex = 0;  
     }
 }
 
