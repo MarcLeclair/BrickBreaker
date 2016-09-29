@@ -12,7 +12,7 @@ public class Brick : MonoBehaviour
     public GameObject smoke;
     public GameObject XLife,XLong, SlowDown;
     public Sprite[] bonus;
-
+   
 
     private int hitCounter;
     private int maxHit;
@@ -20,6 +20,9 @@ public class Brick : MonoBehaviour
 
     public object Quanternion { get; private set; }
 
+
+    private bool flag = false;
+    private float timerOfLength = 0;
     // Use this for initialization
     void Start () {
         
@@ -37,6 +40,7 @@ public class Brick : MonoBehaviour
 	
 	// Update is called once per frame
 	void Update () {
+        
     }
     void OnCollisionEnter2D(Collision2D collision)
     {
@@ -47,6 +51,8 @@ public class Brick : MonoBehaviour
             handleHits();
         }
     }
+
+    //Hit counter
     void handleHits()
     {
 
@@ -62,6 +68,8 @@ public class Brick : MonoBehaviour
         else
             loadSprites();
     }
+
+    //Destroyed bricks load up
     void loadSprites()
     {
         int spriteIndex = (hitCounter - 1);
@@ -73,6 +81,8 @@ public class Brick : MonoBehaviour
         else
             Debug.LogError("Sprite at index " + spriteIndex + " is missing")    ;
     }
+
+    //Brick destroyed 
     void brickDestroyedEvent()
     {
         //TODO Call bonus spawn on destroying a brick if chance is higher than lvlManager.chance
@@ -85,6 +95,8 @@ public class Brick : MonoBehaviour
         lvlManager.BrickDestroyed();
 
     }
+
+    //Chance upon which spawn will be spawned.
     void bonusSpawn()
     {
         double willSpawn = Random.value;
@@ -112,10 +124,20 @@ public class Brick : MonoBehaviour
         }
     }
 
+    //Creates Spawn on brick destroy
     void createSpawn(GameObject nameOfSpawn)
     {
         //TODO Create game object and add velocity + on trigger when contact the paddle
         GameObject whatToSpawn = (GameObject)Instantiate(nameOfSpawn, gameObject.transform.position, Quaternion.identity);
         whatToSpawn.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, -2f);
     }
+
+    void OnGUI()
+    {
+        GUI.Label(new Rect(0, 200, 100, 100), "Your % chance for this level is " + (LevelManager.chance * 100)  );
+    }
+    
+  
+    
 }
+

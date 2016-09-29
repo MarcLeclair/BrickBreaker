@@ -7,8 +7,10 @@ public class RandomSpawns : MonoBehaviour {
     public ball ball;
     public Brick brick;
 
+
     public string nameOfSpawn;
- 
+
+
     void Update()
     {
 
@@ -16,6 +18,7 @@ public class RandomSpawns : MonoBehaviour {
         
         if (GameObject.FindGameObjectsWithTag("Spawn") != null)
         {
+           
 
             if (this.transform.position.y < paddle.transform.position.y)
             {
@@ -40,12 +43,17 @@ public class RandomSpawns : MonoBehaviour {
         if (string.Equals(nameOfSpawn, "slowdown"))
             {
             Vector2 velocity = GameObject.FindGameObjectWithTag("ball").GetComponent<Rigidbody2D>().velocity;
-            GameObject.FindGameObjectWithTag("ball").GetComponent<Rigidbody2D>().velocity = velocity * 0.5f;
+            GameObject.FindGameObjectWithTag("ball").GetComponent<Rigidbody2D>().velocity = velocity * 0.8f;
         }
         if (string.Equals(nameOfSpawn, "xlife"))
         {
             GameObject.FindGameObjectWithTag("loseCollider").GetComponent<LoseCollider>().setLife(1, '+');
             Debug.Log(GameObject.FindGameObjectWithTag("loseCollider").GetComponent<LoseCollider>().getLife());
+        }
+        if(string.Equals(nameOfSpawn, "xlong"))
+        {
+            GameObject.FindGameObjectWithTag("paddle").GetComponent<Transform>().localScale += new Vector3(0.5F, 0, 0);
+            GameObject.FindGameObjectWithTag("paddle").GetComponent<paddle>().setTimer(7);
         }
     }
     

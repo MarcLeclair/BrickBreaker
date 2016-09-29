@@ -6,6 +6,11 @@ public class paddle : MonoBehaviour {
 
     private ball ball;
 
+    public int duration;
+    public int timeRemaining;
+    public bool isCountingDown = false;
+    public bool showText = false;
+
     void Start()
     {
         ball = GameObject.FindObjectOfType<ball>();
@@ -32,5 +37,51 @@ public class paddle : MonoBehaviour {
         float positn = Input.mousePosition.x / Screen.width * 16;
         paddlePos.x = Mathf.Clamp(positn, .5f, 15.5f);
         this.transform.position = paddlePos;
+    }
+
+    //Sets countDown timer
+    public void setTimer(int i)
+    {
+        duration = i;
+        Begin();
+    }
+
+    //Countdown if the paddle has been increased. using Invoke() for repetition and seconds.
+    public void Begin()
+    {
+        if (!isCountingDown)
+        {
+            isCountingDown = true;
+            timeRemaining = duration;
+            Invoke("_tick", 1f);
+        }
+    }
+
+
+    private void _tick()
+    {
+        if (timeRemaining == 5f)
+        {
+            showText = true;
+        }
+        timeRemaining--;
+        if (timeRemaining > 0)
+        {
+            Invoke("_tick", 1f);
+        }
+        else
+        {
+            GameObject.FindGameObjectWithTag("paddle").GetComponent<Transform>().localScale += new Vector3(-0.5F, 0, 0);
+            isCountingDown = false;
+            showText = false;
+        }
+    }
+
+    void OnGUI()
+    {
+        if (showText)
+        {
+            GUI.Label(new Rect(0, 0, 100, 100), "Bar will go back to normal size in " + timeRemaining + " seconds" );
+        }
     }
 }

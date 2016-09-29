@@ -27,8 +27,7 @@ public class LoseCollider : MonoBehaviour {
             GameObject.FindGameObjectWithTag("life").GetComponent<LifeManager>().resetLife();
             lvlManager.LoadLevel("Lose");
             isSet = false;
-        }
-        else
+        }else
         {
 
             setLife(1, '-');
@@ -41,26 +40,26 @@ public class LoseCollider : MonoBehaviour {
 
     public void setLife(int x, char opp)
     {
+
         if (string.Equals(opp, '+'))
         {
             life += x;
             isSet = true;
-        }
-        else if (string.Equals(opp, '-'))
+        }else if (string.Equals(opp, '-'))
         {
             
             life -= x;
             isSet = true;
     
-        }
-        else if (string.Equals(opp, 'r'))
+        }else if (string.Equals(opp, 'r'))
         {
             life = 2;
             isSet = false;
-        }
-        else
+        }else
             Debug.LogError("wrong opperand");
     }
+
+
     public int getLife()
     {
         return life;

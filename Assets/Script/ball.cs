@@ -19,7 +19,7 @@ public class ball : MonoBehaviour {
             this.transform.position = paddle.transform.position + paddleToBall;
             if (Input.GetMouseButtonDown(0))
             {
-                this.GetComponent<Rigidbody2D>().velocity = new Vector2(.5f, 10f);
+                this.GetComponent<Rigidbody2D>().velocity = new Vector2(.5f, 12f);
                 hasStarted = true;
             }
             
@@ -38,5 +38,12 @@ public class ball : MonoBehaviour {
            
         }
     }
- 
+    void FixedUpdate()
+    {
+        if (this.GetComponent<Rigidbody2D>().velocity.magnitude > 25f)
+        {
+            this.GetComponent<Rigidbody2D>().velocity = this.GetComponent<Rigidbody2D>().velocity.normalized * 25f;
+        }
+    }
+
 }
