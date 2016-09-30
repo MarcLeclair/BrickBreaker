@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 15b0d1610130e664b8dea96dc47f3a27
-timeCreated: 1469293660
+timeCreated: 1475267701
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -12,6 +12,12 @@ TextureImporter:
     21300010: right
     21300012: 2 hit
     21300014: 1 hit
+    21300016: bricks_0
+    21300018: bricks_1
+    21300020: bricks_2
+    21300022: bricks_3
+    21300024: bricks_4
+    21300026: bricks_5
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -58,81 +64,133 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: 0 hit
+    - name: bricks_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 124
+        y: 164
         width: 128
         height: 41
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
       - - {x: -64, y: 20.5}
         - {x: -64, y: -20.5}
         - {x: 64, y: -20.5}
         - {x: 64, y: 20.5}
-    - name: left
+    - name: bricks_1
       rect:
         serializedVersion: 2
         x: 1
-        y: 81
+        y: 121
         width: 64
         height: 41
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
       - - {x: -32, y: 20.5}
         - {x: -32, y: -20.5}
         - {x: 32, y: -20.5}
         - {x: 32, y: 20.5}
-    - name: right
+    - name: bricks_2
       rect:
         serializedVersion: 2
         x: 66
-        y: 81
+        y: 122
         width: 62
         height: 41
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
       - - {x: -31, y: 20.5}
         - {x: -31, y: -20.5}
         - {x: 31, y: -20.5}
         - {x: 31, y: 20.5}
-    - name: 2 hit
+    - name: bricks_3
       rect:
         serializedVersion: 2
         x: 0
-        y: 38
+        y: 79
         width: 128
         height: 41
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
       - - {x: -64, y: 20.5}
         - {x: -64, y: -20.5}
         - {x: 64, y: -20.5}
         - {x: 64, y: 20.5}
-    - name: 1 hit
+      - - {x: 22, y: 12.5}
+        - {x: 23, y: 11.5}
+        - {x: 43, y: 11.5}
+        - {x: 50, y: 18.5}
+        - {x: 50, y: 20.5}
+        - {x: 38, y: 20.5}
+        - {x: 22, y: 17.5}
+    - name: bricks_4
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 40
         width: 128
-        height: 38
+        height: 37
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: -64, y: 19}
-        - {x: -64, y: -19}
-        - {x: 64, y: -19}
-        - {x: 64, y: 19}
+      - - {x: 64, y: -4.5}
+        - {x: 64, y: 18.5}
+        - {x: -64, y: 18.5}
+        - {x: -64, y: -18.5}
+        - {x: 64, y: -18.5}
+        - {x: 64, y: -4.5}
+        - {x: 61, y: -5.5}
+    - name: bricks_5
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 0
+        width: 127
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 25.5, y: 19}
+        - {x: 24.5, y: 18}
+        - {x: 25.5, y: 15}
+        - {x: 22.5, y: 16}
+        - {x: 19.5, y: 16}
+        - {x: 15.5, y: 12}
+        - {x: 15.5, y: 10}
+        - {x: 15.5, y: 12}
+        - {x: 14.5, y: 14}
+        - {x: 17.5, y: 15}
+        - {x: 19.5, y: 17}
+        - {x: 18.5, y: 19}
+        - {x: -63.5, y: 19}
+        - {x: -63.5, y: -19}
+        - {x: 63.5, y: -19}
+        - {x: 63.5, y: 19}
+      - - {x: -31.5, y: 11}
+        - {x: -30.5, y: 8}
+        - {x: -26.5, y: 6}
+        - {x: -20.5, y: 6}
+        - {x: -18.5, y: 7}
+        - {x: -18.5, y: 11}
+        - {x: -20.5, y: 13}
+        - {x: -29.5, y: 13}
+      - - {x: -16.5, y: 14}
+        - {x: -16.5, y: 10}
+        - {x: -15.5, y: 8}
+        - {x: -13.5, y: 8}
+        - {x: -9.5, y: 12}
+        - {x: -10.5, y: 15}
+        - {x: -14.5, y: 15}
     outline: []
   spritePackingTag: 
   userData: 

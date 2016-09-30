@@ -6,7 +6,7 @@ public class LevelManager : MonoBehaviour {
 
     private float time;
     public static float chance;
-   
+    public ball ball;
 
     public void LoadLevel(string name)
     {
@@ -78,8 +78,35 @@ public class LevelManager : MonoBehaviour {
         }
     }
 
+    public void easyLoadLevel(string name)
+    {
+        ball.kindOfFlag = 'e';
+        Brick.breakableCount = 0;
+        SceneManager.LoadScene(name);
+    }
 
-  
+    public void mediumLoadLevel(string name)
+    {
+        ball.kindOfFlag = 'm';
+        Brick.breakableCount = 0;
+        SceneManager.LoadScene(name);
+    }
+
+
+    public void hardloadLevel(string name)
+    {
+        ball.kindOfFlag = 'h';
+        Brick.breakableCount = 0;
+        SceneManager.LoadScene(name);
+    }
+
+
+    public void youreinsaneLoadLevel(string name)
+    {
+        ball.kindOfFlag = 'y';
+        Brick.breakableCount = 0;
+        SceneManager.LoadScene(name);
+    }
 
 }
 

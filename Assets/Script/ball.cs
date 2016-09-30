@@ -5,8 +5,11 @@ public class ball : MonoBehaviour {
     private paddle paddle;
     private bool hasStarted = false;
     private Vector3 paddleToBall;
-	// Use this for initialization
-	void Start () {
+
+    public static char kindOfFlag;
+
+    // Use this for initialization
+    void Start () {
         paddle = GameObject.FindObjectOfType<paddle>();
         paddleToBall = this.transform.position - paddle.transform.position;
         //print(paddleToBall);
@@ -19,8 +22,23 @@ public class ball : MonoBehaviour {
             this.transform.position = paddle.transform.position + paddleToBall;
             if (Input.GetMouseButtonDown(0))
             {
-                this.GetComponent<Rigidbody2D>().velocity = new Vector2(.5f, 12f);
-                hasStarted = true;
+                if (kindOfFlag == 'e')
+                {
+                    easyStart(8f);
+                }
+                if (kindOfFlag == 'm')
+                {
+                    easyStart(12f);
+                }
+                if (kindOfFlag == 'h')
+                {
+                    easyStart(16f);
+                }
+                if (kindOfFlag == 'y')
+                {
+                    easyStart(18f);
+                }
+
             }
             
         }
@@ -40,10 +58,21 @@ public class ball : MonoBehaviour {
     }
     void FixedUpdate()
     {
-        if (this.GetComponent<Rigidbody2D>().velocity.magnitude > 25f)
+        if (this.GetComponent<Rigidbody2D>().velocity.magnitude > 20f)
         {
-            this.GetComponent<Rigidbody2D>().velocity = this.GetComponent<Rigidbody2D>().velocity.normalized * 25f;
+            this.GetComponent<Rigidbody2D>().velocity = this.GetComponent<Rigidbody2D>().velocity.normalized * 20f;
         }
     }
+
+    void easyStart(float i)
+    {
+       
+        
+            this.GetComponent<Rigidbody2D>().velocity = new Vector2(.5f, i);
+            hasStarted = true;
+        
+    }
+
+   
 
 }
