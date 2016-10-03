@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class ball : MonoBehaviour {
+    public bool testing = false;
     private paddle paddle;
     private bool hasStarted = false;
     private Vector3 paddleToBall;
@@ -22,6 +23,12 @@ public class ball : MonoBehaviour {
             this.transform.position = paddle.transform.position + paddleToBall;
             if (Input.GetMouseButtonDown(0))
             {
+
+                if(testing == true)
+                {
+                    this.GetComponent<Rigidbody2D>().velocity = new Vector2(.5f, 12);
+                    hasStarted = true;
+                }
                 if (kindOfFlag == 'e')
                 {
                     easyStart(8f);
