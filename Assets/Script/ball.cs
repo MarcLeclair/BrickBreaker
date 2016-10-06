@@ -32,18 +32,22 @@ public class ball : MonoBehaviour {
                 if (kindOfFlag == 'e')
                 {
                     easyStart(8f);
+                    hasStarted = true;
                 }
                 if (kindOfFlag == 'm')
                 {
                     easyStart(12f);
+                    hasStarted = true;
                 }
                 if (kindOfFlag == 'h')
                 {
                     easyStart(16f);
+                    hasStarted = true;
                 }
                 if (kindOfFlag == 'y')
                 {
                     easyStart(18f);
+                    hasStarted = true;
                 }
 
             }
@@ -73,8 +77,6 @@ public class ball : MonoBehaviour {
 
     void easyStart(float i)
     {
-       
-        
             this.GetComponent<Rigidbody2D>().velocity = new Vector2(.5f, i);
             hasStarted = true;
         

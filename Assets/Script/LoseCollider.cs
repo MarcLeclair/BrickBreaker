@@ -19,7 +19,7 @@ public class LoseCollider : MonoBehaviour {
     }
 	void OnTriggerEnter2D (Collider2D collision)
     {
-       
+        Debug.Log("ball hit me");
         if(life <= 0 )
         {
             
