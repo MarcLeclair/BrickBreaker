@@ -12,14 +12,14 @@ public class Brick : MonoBehaviour
     public GameObject smoke;
     public GameObject XLife,XLong, SlowDown;
     public Sprite[] bonus;
-   
+    public  bool isEnabled = true;
+    
 
     private int hitCounter;
     private int maxHit;
     private bool isBreakable;
-
     public object Quanternion { get; private set; }
-
+    
 
     private bool flag = false;
     private float timerOfLength = 0;
@@ -40,33 +40,40 @@ public class Brick : MonoBehaviour
 	
 	// Update is called once per frame
 	void Update () {
-        
     }
     void OnCollisionEnter2D(Collision2D collision)
     {
-        AudioSource.PlayClipAtPoint(tickSound, transform.position);
-       
-        if (isBreakable)
+        if (isEnabled == true)
         {
-            handleHits();
+            AudioSource.PlayClipAtPoint(tickSound, transform.position);
+
+            if (isBreakable)
+            {
+                handleHits();
+            }
+        }
+        else
+        {
+            //do nothing
         }
     }
 
     //Hit counter
     void handleHits()
     {
+       
+            maxHit = hitSprites.Length + 1;
+            hitCounter++;
 
-        maxHit = hitSprites.Length + 1;
-        hitCounter++;
+            if (hitCounter >= maxHit)
+            {
 
-        if (hitCounter >= maxHit)
-        {
-
-            // = Quaternion.identity;
-            brickDestroyedEvent();
-        }
-        else
-            loadSprites();
+                // = Quaternion.identity;
+                brickDestroyedEvent();
+            }
+            else
+                loadSprites();
+        
     }
 
     //Destroyed bricks load up
@@ -132,12 +139,14 @@ public class Brick : MonoBehaviour
         whatToSpawn.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, -2f);
     }
 
-    void OnGUI()
+    
+
+   public void setEnabled(bool x)
     {
-        GUI.Label(new Rect(0, 200, 100, 100), "Your % chance for this level is " + (LevelManager.chance * 100)  );
+        isEnabled = x;
     }
-    
-  
-    
+
+
+
 }
 

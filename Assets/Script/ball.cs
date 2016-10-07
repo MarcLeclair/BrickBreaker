@@ -7,7 +7,11 @@ public class ball : MonoBehaviour {
     private bool hasStarted = false;
     private Vector3 paddleToBall;
 
+    public static bool noBanana = true;
     public static char kindOfFlag;
+    public int duration;
+    public int timeRemaining;
+    public bool isCountingDown = false;
 
     // Use this for initialization
     void Start () {
@@ -82,6 +86,46 @@ public class ball : MonoBehaviour {
         
     }
 
-   
+    public void setTimer(int i)
+    {
+        duration = i;
+        Begin();
+    }
+
+    public void Begin()
+    {
+        if (!isCountingDown)
+        {
+
+            isCountingDown = true;
+            timeRemaining = duration;
+            Invoke("tick", 1f);
+        }
+    }
+
+    private void tick()
+    {
+        
+        timeRemaining--;
+        if (timeRemaining > 0)
+        {
+            Invoke("tick", 1f);
+        }
+        else
+        {
+            GameObject[] objects = GameObject.FindGameObjectsWithTag("breakable");
+            foreach (GameObject obj in objects)
+            {
+                obj.GetComponent<Brick>().setEnabled(true);
+                obj.GetComponent<Brick>().enabled = true;
+            }
+            isCountingDown = false;
+        }
+    }
+
+    void OnGUI()
+    {
+        GUI.Label(new Rect(0, 200, 100, 100), "Your % chance for this level is " + (LevelManager.chance * 100));
+    }
 
 }

@@ -57,10 +57,17 @@ public class RandomSpawns : MonoBehaviour {
         }
         if(string.Equals(nameOfSpawn, "banana"))
         {
-            Vector3 paddlePos = new Vector3(.5f, GameObject.FindGameObjectWithTag("paddle").GetComponent<Transform>().position.y, 0f);
-            float positn = (Input.mousePosition.x / Screen.width * 16) + 5;
-            paddlePos.x = Mathf.Clamp(positn, .5f, 15.5f);
-            GameObject.FindGameObjectWithTag("paddle").GetComponent<Transform>().position = paddlePos;
+
+            GameObject[] objects = GameObject.FindGameObjectsWithTag("breakable");
+            foreach (GameObject obj in objects)
+            {
+                Debug.Log(obj.GetComponent<Brick>().enabled);
+                obj.GetComponent<Brick>().setEnabled(false);
+                obj.GetComponent<Brick>().enabled = false;
+
+                Debug.Log(obj.GetComponent<Brick>().enabled);
+            }
+            GameObject.FindGameObjectWithTag("ball").GetComponent<ball>().setTimer(7);
         }
     }
     
