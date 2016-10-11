@@ -7,16 +7,32 @@ public class ScrewThePlayerSpawn : MonoBehaviour {
 	// Use this for initialization
 	public bool hasSpawned = false;
     public float timeRemaining;
+    public paddle paddle;
+    public Sprite[] rainSprites;
+    private bool ballIsInRainDrop = false;
     // Update is called once per frame
     void Update () {
-        if (!hasSpawned)
+        if (!hasSpawned && !ballIsInRainDrop)
         {
             createSpawn();
         }
+        
 
-	
-	}
 
+    }
+  
+    public void setRain(bool x)
+    {
+        ballIsInRainDrop = x;
+    }
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "paddle")
+        {
+            // Debug.Log("Right here");
+            Destroy(this.gameObject);
+        }
+    }
     private void createSpawn()
     {
         double willSpawn = Random.value;

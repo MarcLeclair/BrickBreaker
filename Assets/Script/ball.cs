@@ -128,4 +128,9 @@ public class ball : MonoBehaviour {
         GUI.Label(new Rect(0, 200, 100, 100), "Your % chance for this level is " + (LevelManager.chance * 100));
     }
 
+    public void setStarting(bool x)
+    {
+        hasStarted = x;
+    }
+
 }

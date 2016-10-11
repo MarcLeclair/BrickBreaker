@@ -50,6 +50,7 @@
      <Compile Include="Assets\Script\LifeManager.cs" />
      <Compile Include="Assets\Script\LoseCollider.cs" />
      <Compile Include="Assets\Script\Music.cs" />
+     <Compile Include="Assets\Script\RainScript.cs" />
      <Compile Include="Assets\Script\RandomSpawns.cs" />
      <Compile Include="Assets\Script\ScrewThePlayerSpawn.cs" />
      <Compile Include="Assets\Script\ball.cs" />

@@ -23,8 +23,10 @@ public class LifeManager : MonoBehaviour {
             {
                 //Do nothing
             }else if(currentIndex < 2){
-                this.GetComponent<SpriteRenderer>().sprite = lifeSprites[currentIndex + 1];
+            
                 currentIndex += 1;
+                this.GetComponent<SpriteRenderer>().sprite = lifeSprites[currentIndex];
+                
             }
         }
 
@@ -36,8 +38,9 @@ public class LifeManager : MonoBehaviour {
                 //Do nothing
             }else if (currentIndex > 0)
             {
-                this.GetComponent<SpriteRenderer>().sprite = lifeSprites[currentIndex - 1];
                 currentIndex -= 1;
+                this.GetComponent<SpriteRenderer>().sprite = lifeSprites[currentIndex];
+              
             }
         }
     }

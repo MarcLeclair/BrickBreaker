@@ -16,11 +16,11 @@ public class RandomSpawns : MonoBehaviour {
 
         //Finds object with Spawn tag and if lower than paddle y pos, means that player missed the spawn -->destroy to not reset the game
         
-        if (GameObject.FindGameObjectsWithTag("Spawn") != null)
+        if (GameObject.FindGameObjectWithTag("Spawn") != null)
         {
            
 
-            if (this.transform.position.y < paddle.transform.position.y)
+            if (this.transform.position.y <= paddle.transform.position.y)
             {
                 Destroy(gameObject);
 
@@ -61,7 +61,7 @@ public class RandomSpawns : MonoBehaviour {
             GameObject[] objects = GameObject.FindGameObjectsWithTag("breakable");
             foreach (GameObject obj in objects)
             {
-                Debug.Log(obj.GetComponent<Brick>().enabled);
+               
                 obj.GetComponent<Brick>().setEnabled(false);
                 obj.GetComponent<Brick>().enabled = false;
 
@@ -69,6 +69,7 @@ public class RandomSpawns : MonoBehaviour {
             }
             GameObject.FindGameObjectWithTag("ball").GetComponent<ball>().setTimer(7);
         }
+      
     }
     
 }
