@@ -3,9 +3,10 @@ using System.Collections;
 
 public class ball : MonoBehaviour {
     public bool testing = false;
-    private paddle paddle;
+    private GameObject paddle;
     private bool hasStarted = false;
     private Vector3 paddleToBall;
+    private bool paddleHasBeenDestroyed = false;
 
     public static bool noBanana = true;
     public static char kindOfFlag;
@@ -15,45 +16,87 @@ public class ball : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        paddle = GameObject.FindObjectOfType<paddle>();
+        paddle = GameObject.FindGameObjectWithTag("paddle");
         paddleToBall = this.transform.position - paddle.transform.position;
         //print(paddleToBall);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        if (!hasStarted)
-        {
-            this.transform.position = paddle.transform.position + paddleToBall;
-            if (Input.GetMouseButtonDown(0))
+
+        if(paddleHasBeenDestroyed == false) {
+            if (!hasStarted)
             {
 
-                if(testing == true)
+                this.transform.position = paddle.transform.position + paddleToBall;
+                if (Input.GetMouseButtonDown(0))
                 {
-                    this.GetComponent<Rigidbody2D>().velocity = new Vector2(.5f, 12);
-                    hasStarted = true;
-                }
-                if (kindOfFlag == 'e')
-                {
-                    easyStart(8f);
-                    hasStarted = true;
-                }
-                if (kindOfFlag == 'm')
-                {
-                    easyStart(12f);
-                    hasStarted = true;
-                }
-                if (kindOfFlag == 'h')
-                {
-                    easyStart(16f);
-                    hasStarted = true;
-                }
-                if (kindOfFlag == 'y')
-                {
-                    easyStart(18f);
-                    hasStarted = true;
-                }
 
+                    if (testing == true)
+                    {
+                        this.GetComponent<Rigidbody2D>().velocity = new Vector2(.5f, 12);
+                        hasStarted = true;
+                    }
+                    if (kindOfFlag == 'e')
+                    {
+                        easyStart(8f);
+                        hasStarted = true;
+                    }
+                    if (kindOfFlag == 'm')
+                    {
+                        easyStart(12f);
+                        hasStarted = true;
+                    }
+                    if (kindOfFlag == 'h')
+                    {
+                        easyStart(16f);
+                        hasStarted = true;
+                    }
+                    if (kindOfFlag == 'y')
+                    {
+                        easyStart(18f);
+                        hasStarted = true;
+                    }
+
+                }
+            }
+            else if (paddleHasBeenDestroyed == true)
+            {
+                if (!hasStarted)
+                {
+
+                    this.transform.position = GameObject.FindGameObjectWithTag("paddle").GetComponent<Transform>().position + paddleToBall;
+                    if (Input.GetMouseButtonDown(0))
+                    {
+
+                        if (testing == true)
+                        {
+                            this.GetComponent<Rigidbody2D>().velocity = new Vector2(.5f, 12);
+                            hasStarted = true;
+                        }
+                        if (kindOfFlag == 'e')
+                        {
+                            easyStart(8f);
+                            hasStarted = true;
+                        }
+                        if (kindOfFlag == 'm')
+                        {
+                            easyStart(12f);
+                            hasStarted = true;
+                        }
+                        if (kindOfFlag == 'h')
+                        {
+                            easyStart(16f);
+                            hasStarted = true;
+                        }
+                        if (kindOfFlag == 'y')
+                        {
+                            easyStart(18f);
+                            hasStarted = true;
+                        }
+
+                    }
+                }
             }
             
         }
@@ -133,4 +176,8 @@ public class ball : MonoBehaviour {
         hasStarted = x;
     }
 
+    public void setPaddle(bool x)
+    {
+        paddleHasBeenDestroyed = x;
+    }
 }

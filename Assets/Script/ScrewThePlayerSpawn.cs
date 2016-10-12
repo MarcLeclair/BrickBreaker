@@ -5,8 +5,8 @@ using UnityEngine.SceneManagement;
 public class ScrewThePlayerSpawn : MonoBehaviour {
     public GameObject spawnForLevel;
 	// Use this for initialization
-	public bool hasSpawned = false;
-    public float timeRemaining;
+	public bool countDown,hasSpawned = false;
+    public float timeRemaining, paddleTime;
     public paddle paddle;
     public Sprite[] rainSprites;
     private bool ballIsInRainDrop = false;
@@ -17,7 +17,10 @@ public class ScrewThePlayerSpawn : MonoBehaviour {
             createSpawn();
         }
         
-
+        if (!GameObject.FindGameObjectWithTag("paddle").GetComponent<paddle>().enabled)
+        {
+            paddleParalyzedTimer();
+        }
 
     }
   
@@ -39,14 +42,22 @@ public class ScrewThePlayerSpawn : MonoBehaviour {
         if (Time.timeSinceLevelLoad > 1f)
         {
             //if (Time.timeSinceLevelLoad > (30f + SceneManager.GetActiveScene().buildIndex * 15))
-
-            if (willSpawn > .1)
+            if (spawnForLevel.name != "tornado") { 
+                if (willSpawn > .1)
+                {
+                    float x = GameObject.FindGameObjectWithTag("ceiling").GetComponent<Collider2D>().bounds.size.x;
+                    Vector2 pos = new Vector2(Random.Range(0, x), GameObject.FindGameObjectWithTag("ceiling").transform.position.y);
+                    GameObject whatToSpawn = (GameObject)Instantiate(spawnForLevel, pos, Quaternion.identity);
+                    whatToSpawn.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, -2f);
+                    Begin();
+                }
+            }
+            else
             {
-                float x = GameObject.FindGameObjectWithTag("ceiling").GetComponent<Collider2D>().bounds.size.x;    
+                float x = GameObject.FindGameObjectWithTag("ceiling").GetComponent<Collider2D>().bounds.size.x;
                 Vector2 pos = new Vector2(Random.Range(0, x), GameObject.FindGameObjectWithTag("ceiling").transform.position.y);
-                GameObject whatToSpawn = (GameObject)Instantiate(spawnForLevel, pos, Quaternion.identity);
-                whatToSpawn.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, -2f);
-                Begin();   
+                GameObject whatToSpawn = (GameObject)Instantiate(spawnForLevel, pos,  Quaternion.identity);
+                Begin();
             }
         }
     }
@@ -73,6 +84,31 @@ public class ScrewThePlayerSpawn : MonoBehaviour {
         else
         {
             hasSpawned = false;
+        }
+    }
+
+    void paddleParalyzedTimer()
+    {
+        if (!countDown)
+        {
+            countDown = true;
+            paddleTime = 2f;
+            Invoke("paddleTick", 1f);
+        }
+    }
+
+    void paddleTick()
+    {
+
+        paddleTime--;
+        if (paddleTime > 0)
+        {
+            Invoke("paddleTick", 1f);
+        }
+        else
+        {
+            GameObject.FindGameObjectWithTag("paddle").GetComponent<paddle>().enabled = true;
+
         }
     }
 }

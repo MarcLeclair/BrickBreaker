@@ -5,6 +5,7 @@ public class paddle : MonoBehaviour {
     public bool autoPlay = false;
 
     private ball ball;
+    
 
     public int duration;
     public int timeRemaining;

@@ -6,8 +6,10 @@ public class RandomSpawns : MonoBehaviour {
     public LoseCollider loseCollider;
     public ball ball;
     public Brick brick;
+    public GameObject burntPaddle;
 
-
+    private bool isCountingDown = false;
+    private float timeRemaining;
     public string nameOfSpawn;
 
 
@@ -69,7 +71,21 @@ public class RandomSpawns : MonoBehaviour {
             }
             GameObject.FindGameObjectWithTag("ball").GetComponent<ball>().setTimer(7);
         }
+        if (string.Equals(nameOfSpawn, "fireball"))
+        {
+            GameObject.FindGameObjectWithTag("ball").GetComponent<ball>().setPaddle(true);
+            Vector2 pos = GameObject.FindGameObjectWithTag("paddle").GetComponent<Transform>().transform.position;
+            Destroy(GameObject.FindGameObjectWithTag("paddle"));
+            GameObject spawnBurnt = (GameObject)Instantiate(burntPaddle, pos, Quaternion.identity);
+
+        }
+        if (string.Equals(nameOfSpawn, "lightening"))
+        {
+            GameObject.FindGameObjectWithTag("paddle").GetComponent<paddle>().enabled = false;
+           
+        }
       
     }
-    
+   
+
 }
