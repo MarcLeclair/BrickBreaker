@@ -29,7 +29,7 @@ public class LevelManager : MonoBehaviour {
 
     public void LoadNextLevel()
     {
-        //TODO fix calculate so it occurs on the right level call
+        
         
         calculateChancePercentage();
         Brick.breakableCount = 0;
@@ -47,7 +47,7 @@ public class LevelManager : MonoBehaviour {
 
     public void calculateChancePercentage()
     {
-        float timeLimit = SceneManager.GetActiveScene().buildIndex  * 30 ;
+        float timeLimit = SceneManager.GetActiveScene().buildIndex  * 50 ;
 
         if (Time.timeSinceLevelLoad <  timeLimit)
         {
@@ -56,26 +56,28 @@ public class LevelManager : MonoBehaviour {
            
             return;
         }
-        if(time < 15 + timeLimit )
+        if(Time.timeSinceLevelLoad < 15 + timeLimit )
         {
             chance = (float)2 / 4;
             return;
         }
-        if(time < 30 + timeLimit)
+        if(Time.timeSinceLevelLoad < 30 + timeLimit)
         {
             chance = (float)1 / 4;
             return;
         }
-        if(time < 45+ timeLimit)
+        if(Time.timeSinceLevelLoad < 45+ timeLimit)
         {
             chance = (float)1 / 5;
             return;
         }
-        if(time < 60 + timeLimit)
+        if(Time.timeSinceLevelLoad < 60 + timeLimit)
         {
             chance = (float) 1 / 6;
             return;
         }
+        
+            // else  do nothing, player doesn't deserve chance!
     }
 
     public void easyLoadLevel(string name)

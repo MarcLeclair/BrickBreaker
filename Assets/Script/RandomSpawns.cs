@@ -7,6 +7,7 @@ public class RandomSpawns : MonoBehaviour {
     public ball ball;
     public Brick brick;
     public GameObject burntPaddle;
+    public AudioClip collisionSound;
 
     private bool isCountingDown = false;
     private float timeRemaining;
@@ -22,8 +23,9 @@ public class RandomSpawns : MonoBehaviour {
         {
            
 
-            if (this.transform.position.y <= paddle.transform.position.y)
+            if (this.transform.position.y < paddle.transform.position.y)
             {
+                
                 Destroy(gameObject);
 
             }
@@ -31,8 +33,10 @@ public class RandomSpawns : MonoBehaviour {
     }
     void OnTriggerEnter2D(Collider2D collision)
     {
+
         if (collision.gameObject.tag == "paddle")
         {
+            GetComponent<AudioSource>().Play();
             triggeredEffect();
            // Debug.Log("Right here");
             Destroy(this.gameObject);
@@ -66,8 +70,7 @@ public class RandomSpawns : MonoBehaviour {
                
                 obj.GetComponent<Brick>().setEnabled(false);
                 obj.GetComponent<Brick>().enabled = false;
-
-                Debug.Log(obj.GetComponent<Brick>().enabled);
+                
             }
             GameObject.FindGameObjectWithTag("ball").GetComponent<ball>().setTimer(7);
         }

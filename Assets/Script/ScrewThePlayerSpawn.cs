@@ -3,24 +3,28 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 
 public class ScrewThePlayerSpawn : MonoBehaviour {
+
     public GameObject spawnForLevel;
-	// Use this for initialization
+	
 	public bool countDown,hasSpawned = false;
     public float timeRemaining, paddleTime;
     public paddle paddle;
     public Sprite[] rainSprites;
     private bool ballIsInRainDrop = false;
-    // Update is called once per frame
+ 
+
     void Update () {
-        if (!hasSpawned && !ballIsInRainDrop)
-        {
-            createSpawn();
-        }
+      
+            if (!hasSpawned && !ballIsInRainDrop)
+            {
+                createSpawn();
+            }
+
+            if (!GameObject.FindGameObjectWithTag("paddle").GetComponent<paddle>().enabled)
+            {
+                paddleParalyzedTimer();
+            }
         
-        if (!GameObject.FindGameObjectWithTag("paddle").GetComponent<paddle>().enabled)
-        {
-            paddleParalyzedTimer();
-        }
 
     }
   
@@ -32,43 +36,84 @@ public class ScrewThePlayerSpawn : MonoBehaviour {
     {
         if (collision.gameObject.tag == "paddle")
         {
-            // Debug.Log("Right here");
+
             Destroy(this.gameObject);
         }
     }
     private void createSpawn()
     {
         double willSpawn = Random.value;
-        if (Time.timeSinceLevelLoad > 1f)
+
+        if (Time.timeSinceLevelLoad > ( SceneManager.GetActiveScene().buildIndex * 5))
         {
-            //if (Time.timeSinceLevelLoad > (30f + SceneManager.GetActiveScene().buildIndex * 15))
-            if (spawnForLevel.name != "tornado") { 
-                if (willSpawn > .1)
+            double chanceOfBadSpawn = .5;
+            if (Time.timeSinceLevelLoad > (10f + SceneManager.GetActiveScene().buildIndex * 5))
+            {
+                chanceOfBadSpawn = .4;
+            }
+            else if (Time.timeSinceLevelLoad > (15f + SceneManager.GetActiveScene().buildIndex * 5))
+            {
+                chanceOfBadSpawn = .3;
+            }
+            else if (Time.timeSinceLevelLoad > (22f + SceneManager.GetActiveScene().buildIndex * 5))
+            {
+                chanceOfBadSpawn = .2;
+            }
+            else if (Time.timeSinceLevelLoad > (30f + SceneManager.GetActiveScene().buildIndex * 5))
+            {
+                chanceOfBadSpawn = .1;
+            }
+            
+            if (willSpawn > chanceOfBadSpawn)
+            {
+               
+                if (spawnForLevel.name != "tornado")
                 {
+                    Debug.Log("creating spawn");
                     float x = GameObject.FindGameObjectWithTag("ceiling").GetComponent<Collider2D>().bounds.size.x;
                     Vector2 pos = new Vector2(Random.Range(0, x), GameObject.FindGameObjectWithTag("ceiling").transform.position.y);
                     GameObject whatToSpawn = (GameObject)Instantiate(spawnForLevel, pos, Quaternion.identity);
                     whatToSpawn.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, -2f);
                     Begin();
                 }
-            }
-            else
-            {
-                float x = GameObject.FindGameObjectWithTag("ceiling").GetComponent<Collider2D>().bounds.size.x;
-                Vector2 pos = new Vector2(Random.Range(0, x), GameObject.FindGameObjectWithTag("ceiling").transform.position.y);
-                GameObject whatToSpawn = (GameObject)Instantiate(spawnForLevel, pos,  Quaternion.identity);
-                Begin();
+
+                else
+                {
+                    Debug.Log("creating spawn");
+                    float x = GameObject.FindGameObjectWithTag("ceiling").GetComponent<Collider2D>().bounds.size.x;
+                    Vector2 pos = new Vector2(Random.Range(0, x), GameObject.FindGameObjectWithTag("ceiling").transform.position.y);
+                    GameObject whatToSpawn = (GameObject)Instantiate(spawnForLevel, pos, Quaternion.identity);
+                    Begin();
+                }
             }
         }
+        
     }
 
     public void Begin()
     {
         if (!hasSpawned)
         {
+            float time = 9;
+            if (Time.timeSinceLevelLoad > (40f + SceneManager.GetActiveScene().buildIndex * 5))
+            {
+                time = 7;
+            }
+            else if (Time.timeSinceLevelLoad > (50f + SceneManager.GetActiveScene().buildIndex * 5))
+            {
+                time = 5;
+            }
+            else if (Time.timeSinceLevelLoad > (50f + SceneManager.GetActiveScene().buildIndex * 5))
+            {
+                time = 4;
+            }
+            else if (Time.timeSinceLevelLoad > (50f + SceneManager.GetActiveScene().buildIndex * 5))
+            {
+                time = 3;
+            }
 
             hasSpawned = true;
-            timeRemaining = 5f;
+            timeRemaining = time;
             Invoke("tick", 1f);
         }
     }
@@ -92,7 +137,7 @@ public class ScrewThePlayerSpawn : MonoBehaviour {
         if (!countDown)
         {
             countDown = true;
-            paddleTime = 2f;
+            paddleTime = 1f;
             Invoke("paddleTick", 1f);
         }
     }

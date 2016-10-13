@@ -56,6 +56,7 @@
      <Compile Include="Assets\Script\ball.cs" />
      <Compile Include="Assets\Script\burntPaddle.cs" />
      <Compile Include="Assets\Script\level.cs" />
+     <Compile Include="Assets\Script\musicLoop.cs" />
      <Compile Include="Assets\Script\paddle.cs" />
      <Compile Include="Assets\Script\tornado.cs" />
  <Reference Include="UnityEngine.UI">
