@@ -2,12 +2,13 @@
 using System.Collections;
 
 public class ball : MonoBehaviour {
-    public bool testing = false;
-    private GameObject paddle;
-    private bool hasStarted = false;
-    private Vector3 paddleToBall;
-    private bool paddleHasBeenDestroyed = false;
+   
+     GameObject paddle;
+     bool hasStarted = false;
+     Vector3 paddleToBall;
+     bool paddleHasBeenDestroyed = false;
 
+    public bool testing = false;
     public static bool noBanana = true;
     public static char kindOfFlag;
     public int duration;

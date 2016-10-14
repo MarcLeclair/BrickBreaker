@@ -10,7 +10,9 @@ public class ScrewThePlayerSpawn : MonoBehaviour {
     public float timeRemaining, paddleTime;
     public paddle paddle;
     public Sprite[] rainSprites;
-    private bool ballIsInRainDrop = false;
+
+
+    bool ballIsInRainDrop = false;
  
 
     void Update () {
@@ -20,11 +22,14 @@ public class ScrewThePlayerSpawn : MonoBehaviour {
                 createSpawn();
             }
 
+        if (GameObject.FindGameObjectsWithTag("paddle") != null)
+        {
             if (!GameObject.FindGameObjectWithTag("paddle").GetComponent<paddle>().enabled)
             {
                 paddleParalyzedTimer();
+
             }
-        
+        }
 
     }
   
@@ -44,22 +49,22 @@ public class ScrewThePlayerSpawn : MonoBehaviour {
     {
         double willSpawn = Random.value;
 
-        if (Time.timeSinceLevelLoad > ( SceneManager.GetActiveScene().buildIndex * 5))
+        if (Time.timeSinceLevelLoad > ( SceneManager.GetActiveScene().buildIndex * 2))
         {
             double chanceOfBadSpawn = .5;
-            if (Time.timeSinceLevelLoad > (10f + SceneManager.GetActiveScene().buildIndex * 5))
+            if (Time.timeSinceLevelLoad > (5f + SceneManager.GetActiveScene().buildIndex * 2))
             {
                 chanceOfBadSpawn = .4;
             }
-            else if (Time.timeSinceLevelLoad > (15f + SceneManager.GetActiveScene().buildIndex * 5))
+            else if (Time.timeSinceLevelLoad > (10f + SceneManager.GetActiveScene().buildIndex * 2))
             {
                 chanceOfBadSpawn = .3;
             }
-            else if (Time.timeSinceLevelLoad > (22f + SceneManager.GetActiveScene().buildIndex * 5))
+            else if (Time.timeSinceLevelLoad > (12f + SceneManager.GetActiveScene().buildIndex * 2))
             {
                 chanceOfBadSpawn = .2;
             }
-            else if (Time.timeSinceLevelLoad > (30f + SceneManager.GetActiveScene().buildIndex * 5))
+            else if (Time.timeSinceLevelLoad > (14f + SceneManager.GetActiveScene().buildIndex * 2))
             {
                 chanceOfBadSpawn = .1;
             }

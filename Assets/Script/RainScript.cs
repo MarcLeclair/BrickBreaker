@@ -7,21 +7,23 @@ public class RainScript : MonoBehaviour {
     public paddle paddle;
     public Sprite[] RainSprites;
     public string nameOfSpawn;
-    private bool hasStarted = false;
-    private float timeRemaining;
-    private float x, y;
+    public AudioClip ballEntering, popping;
+
+     bool hasStarted = false;
+     float timeRemaining;
+     float x, y;
    
     void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log(x + " " +  y);
+       
         this.GetComponent<Rigidbody2D>().velocity = new Vector2(-x, -y);
-        Debug.Log(collision.relativeVelocity);
-        Debug.Log(x + " " + y);
+      
     }
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "ball")
         {
+            AudioSource.PlayClipAtPoint(ballEntering, transform.position);
             GameObject.FindGameObjectWithTag("ceiling").GetComponent<ScrewThePlayerSpawn>().setRain(true);
             triggeredEffect();
             // Debug.Log("Right here");
@@ -66,6 +68,7 @@ public class RainScript : MonoBehaviour {
         else
         {
             hasStarted = false;
+            AudioSource.PlayClipAtPoint(popping, transform.position);
             createBall();
             enableBricks();
             Destroy(gameObject);
@@ -74,7 +77,7 @@ public class RainScript : MonoBehaviour {
 
     void createBall()
     {
-        Vector2 pos = GameObject.FindGameObjectWithTag("rain").GetComponent<Transform>().position;
+        Vector2 pos = this.transform.position;  
         GameObject ballSpawned = (GameObject)Instantiate(ball, pos, Quaternion.identity);
          x = getNewDirection(0f, -12f, 10f);
          y = getNewDirection(0f, -12f, -5f);

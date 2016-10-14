@@ -4,7 +4,8 @@ using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour {
 
-    private float time;
+     float time;
+
     public static float chance;
     public ball ball;
 

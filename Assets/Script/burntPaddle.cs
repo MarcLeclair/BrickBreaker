@@ -3,8 +3,8 @@ using System.Collections;
 
 public class burntPaddle : MonoBehaviour {
 
-    private bool isCountingDown = false;
-    private float timeRemaining;
+     bool isCountingDown = false;
+     float timeRemaining;
 
     public GameObject paddle;
 	// Use this for initialization

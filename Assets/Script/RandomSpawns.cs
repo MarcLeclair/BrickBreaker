@@ -8,10 +8,11 @@ public class RandomSpawns : MonoBehaviour {
     public Brick brick;
     public GameObject burntPaddle;
     public AudioClip collisionSound;
-
-    private bool isCountingDown = false;
-    private float timeRemaining;
     public string nameOfSpawn;
+
+    bool isCountingDown = false;
+     float timeRemaining;
+    
 
 
     void Update()
@@ -36,7 +37,9 @@ public class RandomSpawns : MonoBehaviour {
 
         if (collision.gameObject.tag == "paddle")
         {
-            GetComponent<AudioSource>().Play();
+            AudioSource.PlayClipAtPoint(collisionSound, GameObject.FindGameObjectWithTag("paddle").GetComponent<Transform>().position);
+         
+            
             triggeredEffect();
            // Debug.Log("Right here");
             Destroy(this.gameObject);

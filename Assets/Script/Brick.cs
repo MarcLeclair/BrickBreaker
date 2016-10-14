@@ -15,10 +15,10 @@ public class Brick : MonoBehaviour
     public  bool isEnabled = true;
     
 
-    private int hitCounter;
-    private int maxHit;
-    private bool isBreakable;
-    public object Quanternion { get; private set; }
+     int hitCounter;
+     int maxHit;
+     bool isBreakable;
+     
     
 
     private bool flag = false;
